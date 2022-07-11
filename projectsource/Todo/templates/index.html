@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADD TASK</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<center>	
+  <!------------------------ popup login ------------------>
+  {%for i in content %}
+  <div id="popup-{{forloop.counter}}" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form action="/update/{{i.id}}" method="post">
+          {%csrf_token%}
+					<div class="modal-header">						
+						<h4 class="modal-title">Edit Task Details <i class="material-icons"  title="Edit">&#xE254;</i></h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">					
+						<div class="form-group">
+							<label>Title</label>
+							<input  name="title" value=" {{i.title}} "type="text" class="form-control" required>
+						</div>
+					
+						<div class="form-group">
+							<label>Task</label>
+							<input name="task" value=" {{i.task}} " type="text" class="form-control" required>
+						</div>					
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+						<input type="submit" class="btn btn-info" value="Update">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{%endfor%}
+<!------------------------ popup login  END------------------>
+
+
+
+	<h3 class="text-center my-3 pb-6  ">Add Task</h3>
+  <a href="/t" class=" btn btn-primary " type="submit" > view pending list</a>
+	  <section class="vh-100" style="background-color: rgba(35, 18, 128, 0.4);">
+  <div class="container py-5  h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-6 col-xl-7">
+        <div class="card rounded-3">
+          <div class="card-body p-4">
+            <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2" action="{% url 'add'%}" method="post">
+              {% csrf_token %}
+              <div class="col-12">
+                <div class="form-outline">
+					<label for="title"><h4>Title </h4></label>
+		  <input name="title" type="text" class="form-control" id="title"  placeholder="Enter your Task Title">
+		 <br><br>
+					<input name="task" type="text" class="form-control form-control-lg py-5" id="Task_discription"
+					placeholder="Add new task ...">
+                  <label class="form-label" for="text"><h4>Enter Your task here</h4></label>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">Add Task</button>
+              </div>
+            </form></center>
+			<h4 class="text-center my-3 pb-3">Task todo</h4>
+            <table class="table mb-4">
+              <thead>
+                <tr>
+                  <th scope="col">No.</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Task todo</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%for i in content %}
+                <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                    <td>{{i.title}}</td>
+                    <td>{{i.task}}</td>
+                    <td>In progress
+						<br>
+					<i> added <span class="badge badge-secondary"> &#10004;</span> </i>
+          <br>
+					<small>created({{i.time}} )</small>
+          <br>
+          <small>modified( {{i.mtime}} )</small>
+					</td>
+                    <td>
+                      <a href="#deleteTask-{{forloop.counter}}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                      &nbsp; &nbsp;
+                      <a href="#popup-{{forloop.counter}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                      
+                    </td>
+                  </tr>
+                {%endfor%}
+              </tbody>
+            </table>
+
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+{% for i in content%}
+<!-- Delete Modal HTML -->
+<div id="deleteTask-{{forloop.counter}}" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form>cd 
+        <div class="modal-header">						
+          <h4 class="modal-title">Delete Records?</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">					
+          <p>Are you sure you want to delete these Records?</p>
+          <p class="text-warning"> Tite: <small> {{i.title}} </small></p>
+        </div>
+        <div class="modal-footer">
+          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+          <a  href="/delete/{{i.id}}" type="submit" class="btn btn-danger" > Delete</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{%endfor%}
+</body>
+
+
+</html>

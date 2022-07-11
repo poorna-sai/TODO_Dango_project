@@ -1,0 +1,80 @@
+
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task list</title>
+    	
+	<link rel="stylesheet" href="{%static 'styles/css/bootstrap-grid.css'%}">
+	<link rel="stylesheet" href="{%static 'styles/css/bootstrap-grid.css.map'%}">
+	<link rel="stylesheet" href="{%static 'styles/css/bootstrap-grid.min.css'%}">
+	<link rel="stylesheet" href="{%static 'styles/css/bootstrap-grid.min.css.map'%}">
+	<link rel="stylesheet" href="{%static 'styles/css/bootstrap-reboot.css'%}">
+	<link rel="stylesheet" href="{%static 'styles/css/bootstrap-reboot.css.map'%}">
+	<link rel="stylesheet" href="{%static 'styles/css/bootstrap-reboot.min.css'%}">
+	<link rel="stylesheet" href="{%static 'styles/css/bootstrap-reboot.min.css.map'%}">
+	<link rel="stylesheet" href="{%static 'styles/css/bootstrap.css'%}">
+	<link rel="stylesheet" href="{%static 'styles/css/bootstrap.css.map'%}">
+	<link rel="stylesheet" href="{%static 'styles/css/bootstrap.min.css'%}">
+	<link rel="stylesheet" href="{%static 'styles/css/bootstrap.min.css.map'%}">
+  <link rel="stylesheet" href="{%static 'styles/css/style.css'%}">
+
+
+</head>
+<body>
+    	
+        <section class="vh-100" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+      
+          <div class="card rounded-3">
+            <div class="card-body p-4">
+              <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
+            
+                  
+              <h4 class="text-center my-3 pb-3">Task todo</h4>
+              <table class="table m-0">
+                <thead>
+                  <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Title</th>
+                    <th scope="col"> Task Todo</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {%for i in content %}
+                    <tr>
+                        <th scope="row"> {{ forloop.counter }}</th>
+                        <td>{{i.title}}</td>
+                        <td> {{i.task}}</td>
+                        <td> <i>Modified</i>
+                            <br>
+                            <small>created( {{i.time}} )</small>
+                            <br>
+                            <small>Modified(nov ,10.12.22)</small><br>
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-success ms-1">Finished</button>
+                        </td>
+                      </tr>
+                      {%endfor%}
+                      
+        </div>
+      </div>
+    </div>
+  </section>
+  
+</body>
+<script type="text/javascript" href="{%static 'styles/js/bootstrap.bundle.js'%}"></script>
+<script type="text/javascript" href="{%static 'styles/js/bootstrap.bundle.js.map'%}"></script>
+<script type="text/javascript" href="{%static 'styles/js/bootstrap.bundle.min.js'%}"></script>
+<script type="text/javascript" href="{%static 'styles/js/bootstrap.bundle.min.js.map'%}"></script>
+<script type="text/javascript" href="{%static 'styles/js/bootstrap.js'%}"></script>
+<script type="text/javascript" href="{%static 'styles/js/bootstrap.js.map'%}"></script>
+<script type="text/javascript" href="{%static 'styles/js/bootstrap.min.js'%}"></script>
+</html>
